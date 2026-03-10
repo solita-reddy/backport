@@ -1,6 +1,6 @@
 {
-  "repoOwner": "YOUR_ORG",
-  "repoName": "YOUR_REPO",
+  "repoOwner": "solita-reddy",
+  "repoName": "backport",
 
   "targetBranchChoices": ["main", "release/1.x", "release/2.x"],
 
