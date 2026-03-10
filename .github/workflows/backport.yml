@@ -1,0 +1,27 @@
+name: Automatic backport action
+
+on:
+  pull_request_target:
+    types: ["labeled", "closed"]
+
+jobs:
+  backport:
+    name: Backport PR
+    # Only run when a PR is merged, and skip PRs that are themselves backports
+    if: github.event.pull_request.merged == true && !(contains(github.event.pull_request.labels.*.name, 'backport'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Backport Action
+        uses: sorenlouv/backport-github-action@v10.2.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Any label matching "backport-to-<branch>" will trigger a backport to that branch
+          auto_backport_label_prefix: backport-to-
+
+      - name: Info log
+        if: ${{ success() }}
+        run: cat ~/.backport/backport.info.log
+
+      - name: Debug log
+        if: ${{ failure() }}
+        run: cat ~/.backport/backport.debug.log
