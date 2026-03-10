@@ -10,6 +10,9 @@ jobs:
     # Only run when a PR is merged, and skip PRs that are themselves backports
     if: github.event.pull_request.merged == true && !(contains(github.event.pull_request.labels.*.name, 'backport'))
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Backport Action
         uses: sorenlouv/backport-github-action@v10.2.0
