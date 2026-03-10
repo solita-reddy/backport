@@ -6,5 +6,7 @@
 
   "branchLabelMapping": {
     "^backport-to-(.+)$": "$1"
-  }
+  },
+
+  "commitConflicts": true
 }
